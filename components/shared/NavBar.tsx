@@ -25,7 +25,7 @@ const NavBar = () => {
           {/* only display when signed in */}
           <SignedIn>
             {/* allow user to sign out */}
-            <SignOutButton>
+            <SignOutButton redirectUrl="/sign-in">
               <div className="flex cursor-pointer">
                 <Image
                   src='/assets/logout.svg'
