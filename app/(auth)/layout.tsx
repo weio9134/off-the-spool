@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Off the Spool",
-  description: "A Threads Clone",
+  description: "A Next.js 14 Meta Threads App",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
