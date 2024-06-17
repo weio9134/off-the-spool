@@ -32,7 +32,8 @@ const LeftBar = () => {
               />
               <p className="text-light-1 max-lg:hidden">{link.label}</p>
             </Link>
-        )})}
+          )
+        })}
       </div>
       
       {/* sign out button */}
