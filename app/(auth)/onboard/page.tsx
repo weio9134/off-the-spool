@@ -3,9 +3,7 @@ import { currentUser } from "@clerk/nextjs/server";
 
 async function Page() {
   const user = await currentUser()
-  if(!user) return (
-    <div> NO USER FOUND </div>
-  );
+  if(!user) return ( <div> NO USER FOUND </div> )
 
   const userInfo = {}
   // if (userInfo?.onboarded) redirect("/");
