@@ -1,12 +1,14 @@
 import AccountProfile from "@/components/forms/AccountProfile";
+import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 async function Page() {
   const user = await currentUser()
   if(!user) return ( <div> NO USER FOUND </div> )
 
-  const userInfo = {}
-  // if (userInfo?.onboarded) redirect("/");
+  const userInfo = await fetchUser(user.id)
+  if (userInfo?.onboarded) redirect("/");
 
   const userData = {
     id: user?.id,
@@ -16,14 +18,6 @@ async function Page() {
     bio: userInfo?.bio || "",
     img: userInfo?.image || user?.imageUrl,
   }
-  // const userData = {
-  //   id: "123",
-  //   objectId: "456",
-  //   username: "tester",
-  //   name: "test",
-  //   bio: "testing",
-  //   img: "",
-  // }
 
   return (
     <main className="mx-auto max-w-3xl flex flex-col justify-start px-10 py-20">
