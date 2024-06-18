@@ -53,6 +53,6 @@ export async function fetchUser(userId: string) {
     //   model: Community
     // })
   } catch (error: any) {
-    throw new Error(`Failed to create/update user:\n ${error.message}`)
+    throw new Error(`Failed to find user:\n ${error.message}`)
   }
 }
