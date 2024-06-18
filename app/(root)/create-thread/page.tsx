@@ -12,11 +12,11 @@ const Page = async () => {
   if(!userInfo?.onboarded) redirect('/onboard')
 
   return (
-    <div>
+    <section>
       <h1 className="head-text"> Create Thread </h1>
 
       <PostThread userId={userInfo._id}/>
-    </div>
+    </section>
   )
 }
 

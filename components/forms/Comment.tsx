@@ -26,6 +26,7 @@ type CommentProp = {
   currentUserId: string,
 }
 
+// comment text area
 const Comment = ({ threadId, currentUserImg, currentUserId }: CommentProp) => {
   const router = useRouter()
   const pathname = usePathname()
@@ -38,7 +39,7 @@ const Comment = ({ threadId, currentUserImg, currentUserId }: CommentProp) => {
       path: pathname,
     })
 
-    router.push("/")
+    location.reload()
   }
 
   const form = useForm({
@@ -50,7 +51,6 @@ const Comment = ({ threadId, currentUserImg, currentUserId }: CommentProp) => {
 
   return (
     <div>
-      <h1>commet</h1>
       <Form {...form}>
         <form 
           onSubmit={form.handleSubmit(onSubmit)} 
@@ -77,12 +77,6 @@ const Comment = ({ threadId, currentUserImg, currentUserId }: CommentProp) => {
                     className='no-focus text-light-1 outline-none'
                     {...field}
                   />
-                  {/* <Input
-                    type='text'
-                    placeholder='Type your comment...'
-                    className='no-focus text-light-1 outline-none'
-                    {...field}
-                  /> */}
                 </FormControl>
                 <FormMessage />
               </FormItem>
