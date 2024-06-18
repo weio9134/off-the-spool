@@ -100,3 +100,35 @@ export async function fetchThreadById(id: string) {
     throw new Error(`Failed to fetch post by id:\n ${error.message}`)
   }
 }
+
+
+type AddCommentProp = {
+  threadId: string,
+  text: string,
+  userId: string,
+  path: string
+}
+
+export async function addComment({ threadId, text, userId, path }: AddCommentProp) {
+  try {
+    connectToDB();
+
+    const orig = await Thread.findById(threadId)
+    if(!orig) throw new Error("Thread not found")
+    
+    // create new thread with comment
+    const commentThread = new Thread({
+      text: text,
+      author: userId,
+      parentId: threadId
+    })
+
+    // save it and append to orignal thread
+    const saveComment = await commentThread.save()
+    orig.children.push(saveComment._id)
+    await orig.save()
+    revalidatePath(path)
+  } catch (error: any) {
+    throw new Error(`Failed to add comment:\n ${error.message}`)
+  }
+}

@@ -83,7 +83,7 @@ const AccountProfile = ({user, title}: ProfileProps) => {
 
     // update user profile
     await updateUser({
-      userId: user.id,
+      userId: JSON.parse(user.id),
       username: values.username,
       name: values.name,
       bio: values.bio,

@@ -4,6 +4,7 @@ import { currentUser } from '@clerk/nextjs/server'
 import { fetchUser } from '@/lib/actions/user.actions'
 import { redirect } from 'next/navigation'
 import { fetchThreadById } from '@/lib/actions/thread.actions'
+import Comment from '@/components/forms/Comment'
 
 const Page = async ({ params }: { params: { id: string }}) => {
   if(!params.id) return ( <div> NO THREAD FOUND </div> )
@@ -31,6 +32,31 @@ const Page = async ({ params }: { params: { id: string }}) => {
           comments={thread.children}
           isComment={false}
         />
+      </div>
+
+      <div className="mt-7">
+        <Comment
+          threadId={thread.id}
+          currentUserImg={userInfo.img}
+          currentUserId={JSON.stringify(userInfo._id)}
+        />
+      </div>
+
+      <div className="mt-10">
+        {thread.children.map((comm: any) => (
+          <ThreadCard 
+            key={comm._id}
+            id={comm._id}
+            currentUserId={user?.id ?? ""}
+            parentId={comm.parentId}
+            content={comm.text}
+            author={comm.author}
+            community={comm.community}
+            createdAt={comm.createdAt}
+            comments={comm.children}
+            isComment={true}
+          />
+        ))}
       </div>
     </section>
   )
