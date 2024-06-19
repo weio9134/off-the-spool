@@ -49,7 +49,7 @@ export async function fetchCommunityDetails(id: string) {
       {
         path: "members",
         model: User,
-        select: "name username image _id id",
+        select: "name username img _id id",
       },
     ])
 
@@ -71,7 +71,7 @@ export async function fetchCommunityPosts(id: string) {
         {
           path: "author",
           model: User,
-          select: "name image id",
+          select: "name img id",
         },
         {
           path: "children",
@@ -79,7 +79,7 @@ export async function fetchCommunityPosts(id: string) {
           populate: {
             path: "author",
             model: User,
-            select: "image _id",
+            select: "img _id",
           },
         },
       ],
