@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react'
 import Image from 'next/image';
+import { formatDateString } from '@/lib/utils';
 
 type ThreadCardProp = {
   id: string;
@@ -107,11 +108,27 @@ const ThreadCard = ({
                   {comments.length} replies
                 </p>
               </Link>
-              
             </div>
           </div>
         </div>
       </div>
+
+      {!isComment && community && (
+        <Link href={`/communities/${community.id}`} className='mt-5 flex items-center'>
+          <p className="text-subtle-medium text-gray-1">
+            {formatDateString(createdAt)}
+            {' '} - {' '}
+            {community.name}
+          </p>
+          <Image
+            src={community.img}
+            alt={community.name}
+            width={15}
+            height={15}
+            className='ml-1 rounded-full object-cover'
+          />
+        </Link>
+      )}
     </article>
   )
 }

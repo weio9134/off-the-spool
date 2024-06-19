@@ -4,6 +4,7 @@ import User from "../models/user.model"
 import { connectToDB } from "../mongoose"
 import Thread from "../models/thread.model"
 import { FilterQuery, SortOrder } from "mongoose"
+import Community from "../models/community.model"
 
 type UserProp = {
   userId: string, 
@@ -44,16 +45,17 @@ export async function updateUser({
   }
 }
 
+
 export async function fetchUser(userId: string) {
   try {
     connectToDB()
 
     return await User
     .findOne({ id: userId })
-    // .populate({
-    //   path: 'communities',
-    //   model: Community
-    // })
+    .populate({
+      path: 'communities',
+      model: Community
+    })
   } catch (error: any) {
     throw new Error(`Failed to find user:\n ${error.message}`)
   }
@@ -64,23 +66,28 @@ export async function fetchUserPost(userId: string) {
   try {
     connectToDB()
 
-    const threads = await User
-      .findOne({ id: userId })
-      .populate({
-        path: 'threads',
-        model: Thread,
-        populate: {
-          path: 'children',
+    const threads = await User.findOne({ id: userId }).populate({
+      path: "threads",
+      model: Thread,
+      populate: [
+        {
+          path: "community",
+          model: Community,
+          select: "name id image _id",
+        },
+        {
+          path: "children",
           model: Thread,
           populate: {
-            path: 'author',
+            path: "author",
             model: User,
-            select: "name img id",
+            select: "name image id",
           },
-        }
-    });
+        },
+      ],
+    })
     
-      return threads
+    return threads
   } catch (error: any) {
     throw new Error(`Failed to find user posts:\n ${error.message}`)
   }
