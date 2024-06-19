@@ -204,6 +204,7 @@ export async function updateCommunityInfo( communityId: string, name: string, us
   }
 }
 
+
 export async function deleteCommunity(communityId: string) {
   try {
     connectToDB()
