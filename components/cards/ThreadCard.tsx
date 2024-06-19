@@ -16,7 +16,7 @@ type ThreadCardProp = {
   community: {
     id: string,
     name: string,
-    img: string
+    image: string
   } | null
   createdAt: string,
   comments: {
@@ -121,7 +121,7 @@ const ThreadCard = ({
             {community.name}
           </p>
           <Image
-            src={community.img}
+            src={community.image}
             alt={community.name}
             width={15}
             height={15}

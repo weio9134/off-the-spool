@@ -6,12 +6,13 @@ type HeaderProp = {
   accountId: string,
   authUserId: string,
   name: string,
-  userName: string,
+  username: string,
   imgUrl: string,
-  bio: string
+  bio: string,
+  type?: 'User' | 'Community'
 }
 
-const ProflileHeader = ({ accountId, authUserId, name, userName, imgUrl, bio}: HeaderProp) => {
+const ProfileHeader = ({ accountId, authUserId, name, username, imgUrl, bio, type='User' }: HeaderProp) => {
   return (
     <div className='flex flex-col w-full justify-start'>
       <div className="flex items-center justify-between">
@@ -29,7 +30,7 @@ const ProflileHeader = ({ accountId, authUserId, name, userName, imgUrl, bio}: H
           {/* load profile name and username */}
           <div className="flex-1">
             <h2 className='text-left text-heading3-bold text-light-1'> {name} </h2>
-            <p className='text-base-medium text-gray-1'> @{userName} </p>
+            <p className='text-base-medium text-gray-1'> @{username} </p>
           </div>
         </div>
       </div>
@@ -41,4 +42,4 @@ const ProflileHeader = ({ accountId, authUserId, name, userName, imgUrl, bio}: H
   )
 }
 
-export default ProflileHeader
+export default ProfileHeader
